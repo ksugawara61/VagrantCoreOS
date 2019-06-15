@@ -1,0 +1,4 @@
+.vagrant/*
+config.ign.merged
+*.img
+*.vmdk
