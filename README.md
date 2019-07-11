@@ -9,19 +9,17 @@ Docker利用に特化するためにOSは[CoreOS](https://coreos.com/)を採用�
 
 CoreOSとはLinux Distributionの一つでDockerなどのコンテナ利用に特化したLinux OSです。
 
-## Rancherとは
-
-Rancherとは、マルチホストのDocker環境を管理するフレームワークの一つであるKubenetesクラスタを管理できるGUIツールです。
-
-
 ## 設定パラメータ
 
 Vagrantfileファイル内の以下の変数を変更することでインスタンスの設定変更が可能です。
 
-| 項目 | 変数名 | 説明 |
-| :---- | :---- | :---- |
-| ノードのメモリー | $node_vm_memory | Masterノードで利用可能なメモリー数 |
-| ノードのCPU | $node_vm_cpu | Masterノードで利用可能なCPU数 |
+| 項目 |変数名 | 説明 |
+| :--- | :--- | :--- |
+| ノードのIP | node_ip | ノードに設定するIPアドレス |
+| ノードのホスト名 | node_hostname | ノードのホスト名 |
+| ノードのメモリー | node_vm_memory | Masterノードで利用可能なメモリー数 |
+| ノードのCPU | node_vm_cpu | Masterノードで利用可能なCPU数 |
+| ノードのポート | node_port_array | ノードで利用するポート |
 
 ## セットアップ方法
 
