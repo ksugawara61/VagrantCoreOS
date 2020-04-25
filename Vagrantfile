@@ -2,23 +2,19 @@
 # vi: set ft=ruby :
 
 # constraint variables
-VAGRANT_API_VERSION = '2'
-UPDATE_CHANNEL = 'alpha'
+VAGRANT_API_VERSION = '2'.freeze
+UPDATE_CHANNEL = 'stable'.freeze
 
 # setting variables for node
 node_ip = '172.16.1.170'
 node_hostname = 'node001'
 node_vm_memory = 2048
 node_vm_cpus = 2
-node_port_array = [80, 443, 3000]
+node_port_array = [80, 443, 3000, 3001, 3002, 3003, 5601, 9200]
 
 Vagrant.require_version '>= 1.6.0'
 
-# Make sure the vagrant-ignition plugin is installed
-required_plugins = %w[vagrant-ignition]
-
 Vagrant.configure(VAGRANT_API_VERSION) do |config|
-
   config.ssh.insert_key = false
   config.ssh.forward_agent = true
 
@@ -54,4 +50,24 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
     end
   end
 
+  config.trigger.before [:up, :reload] do |trigger|
+    trigger.info = 'Starging script for before up...'
+    trigger.run = {
+      path: './bin/before_up_proxy.sh'
+    }
+  end
+
+  config.trigger.after [:up, :reload] do |trigger|
+    trigger.info = 'Starging script for after up...'
+    trigger.run = {
+      path: './bin/after_up_proxy.sh'
+    }
+  end
+
+  config.vm.synced_folder(
+    './share', '/home/core/share',
+    id: 'core',
+    nfs: true,
+    mount_options: [ 'nolock,vers=3,udp' ]
+  )
 end

@@ -2,3 +2,5 @@
 config.ign.merged
 *.img
 *.vmdk
+share/*
+!share/.gitkeep

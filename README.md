@@ -32,7 +32,16 @@ $ vagrant up
 CoreOSではデフォルトで docker-compose がインストールされていないため、vagrantの **config.vm.provision :shell** を利用して、プロビジョニングのタイミングで bin/setup.sh を実行し、docker-compose をインストールしています。<br>
 スクリプトの処理では[こちら](http://docs.docker.jp/compose/install.html#id4)を参考に docker-composeコンテナとしてインストールを行なっています。
 
+## 共有ディレクトリ
+
+ホストOSの **./share** ディレクトリ配下で編集したファイルはゲストOSのノード上にも共有されるように設定しています。
+
+| ホストOSのディレクトリパス | ゲストOSのディレクトリパス |
+| :---: | :---: |
+| ./share | /home/core/share |
+
 ## 参考
 
 1. Open source, containers, and Kubernetes _ CoreOS, https://coreos.com/, Online; accessed 11-June-2019.
 2. Docker Compose のインストール — Docker-docs-ja 17.06.Beta ドキュメント, http://docs.docker.jp/compose/install.html#id4, Online; accessed 12-June-2019.
+3. Vagrant + CoreOS + Dockerを利用した開発環境セットアップ, https://gist.github.com/yasushiyy/9923d68e4811d458fbe0, Online; accessed 25-April-2020.
